@@ -5,6 +5,7 @@ from golden_method import *
 from functions import *
 from optimize_with_gradient import *
 from scipy.optimize import minimize
+from fibbonaaci import fibonacci_search
 from variables import *
 
 def main():
@@ -96,5 +97,20 @@ def main():
 
     
 
+    x_opt, f_opt = fibonacci_search(function1d, a, b, n=20)
+    print(f"Метод Фибоначчи: минимум найден: x = {x_opt:.6f}, f(x) = {f_opt:.6f}")
+    
+    x_vals = np.linspace(a, b, 400)
+    y_vals = [function1d(x) for x in x_vals]
+
+    plt.plot(x_vals, y_vals, label=r'$f(x)=(x-2)^2+0.5\sin(2x)$')
+    plt.scatter(x_opt, f_opt, color='red', zorder=3,
+                label=f"Минимум: x={x_opt:.4f}, f(x)={f_opt:.4f}")
+    plt.xlabel("x")
+    plt.ylabel("f(x)")
+    plt.title("Оптимизация методом Фибоначчи")
+    plt.legend()
+    plt.grid()
+    plt.show()
 if __name__ == "__main__":
     main()
